@@ -35,7 +35,7 @@ export default function CustomizeTrip() {
     
     foodPreference: 'No special requirement',
     estimatedBudget: '',
-    currency: 'USD',
+    currency: 'INR',
     specialRequirements: '',
     travelPreferences: ['Sightseeing', 'Cultural experience']
   });
@@ -130,7 +130,7 @@ export default function CustomizeTrip() {
 
             <h2 style={{ fontSize: '2.4rem', marginBottom: '0.75rem' }}>Your Trip Request Has Been Submitted!</h2>
             <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', marginBottom: '2.5rem' }}>
-              Thank you for choosing Tourister. Our destination specialists are reviewing your requirements and will contact you shortly.
+              Thank you for choosing TRIP MAX. A confirmation email with full request details has been dispatched to <strong>{submittedTrip.userEmail}</strong>. Our travel specialists are reviewing your requirements and will contact you shortly!
             </p>
 
             <div style={{ background: '#f8fafc', padding: '1.75rem', borderRadius: '16px', border: '1px solid var(--border-light)', textAlign: 'left', marginBottom: '2.5rem' }}>
@@ -182,14 +182,14 @@ export default function CustomizeTrip() {
 
         <ErrorMessage message={error} />
 
-        <form onSubmit={handleSubmit} style={{ background: '#fff', padding: '3rem', borderRadius: '24px', boxShadow: 'var(--shadow-md)', border: '1px solid var(--border-light)' }}>
+        <form onSubmit={handleSubmit} className="customize-trip-form" style={{ background: '#fff', borderRadius: '24px', boxShadow: 'var(--shadow-md)', border: '1px solid var(--border-light)' }}>
           {/* Section 1: User Contact Details */}
           <div style={{ marginBottom: '2.5rem' }}>
             <h3 style={{ fontSize: '1.3rem', color: 'var(--primary-navy)', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Users size={20} color="#0284c7" /> 1. Traveler Information
             </h3>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem' }}>
               <div className="form-group">
                 <label className="form-label">Full Name *</label>
                 <input 
@@ -251,7 +251,7 @@ export default function CustomizeTrip() {
               <MapPin size={20} color="#0284c7" /> 2. Travel Destinations & Schedule
             </h3>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem' }}>
               <div className="form-group">
                 <label className="form-label">Starting Location / Origin City</label>
                 <input 
@@ -324,7 +324,7 @@ export default function CustomizeTrip() {
 
             <div className="form-group">
               <label className="form-label">Preferred Modes of Transportation</label>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.75rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '0.75rem' }}>
                 {TRANSPORT_OPTIONS.map(opt => (
                   <label key={opt} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.92rem', cursor: 'pointer' }}>
                     <input 
@@ -338,7 +338,7 @@ export default function CustomizeTrip() {
               </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem', marginTop: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem', marginTop: '1.5rem' }}>
               <div className="form-group">
                 <label className="form-label">Accommodation Level</label>
                 <select 
@@ -389,7 +389,7 @@ export default function CustomizeTrip() {
               <DollarSign size={20} color="#0284c7" /> 4. Budget & Special Requirements
             </h3>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1.25rem', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1.25rem', marginBottom: '1.5rem' }}>
               <div className="form-group">
                 <label className="form-label">Estimated Budget Amount</label>
                 <input 
@@ -415,7 +415,7 @@ export default function CustomizeTrip() {
 
             <div className="form-group">
               <label className="form-label">Trip Style & Preferences</label>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.75rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '0.75rem' }}>
                 {PREFERENCE_OPTIONS.map(opt => (
                   <label key={opt} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.92rem', cursor: 'pointer' }}>
                     <input 
@@ -443,11 +443,12 @@ export default function CustomizeTrip() {
           </div>
 
           <div style={{ textAlign: 'center', paddingTop: '1rem' }}>
-            <button type="submit" disabled={submitting} className="btn btn-amber btn-lg" style={{ minWidth: '280px' }}>
+            <button type="submit" disabled={submitting} className="btn btn-amber btn-lg" style={{ width: '100%', maxWidth: '320px' }}>
               {submitting ? 'Submitting Request...' : 'Submit Customized Trip Request'}
             </button>
           </div>
         </form>
+
 
         {/* Unauthenticated Auth Gate Modal */}
         {showAuthGateModal && (

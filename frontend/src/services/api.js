@@ -3,10 +3,11 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 export async function request(endpoint, options = {}) {
   const token = localStorage.getItem('tourister_token');
   
-  const headers = {
-    'Content-Type': 'application/json',
-    ...options.headers,
-  };
+  const headers = { ...options.headers };
+
+  if (!(options.body instanceof FormData)) {
+    headers['Content-Type'] = 'application/json';
+  }
 
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
@@ -17,7 +18,7 @@ export async function request(endpoint, options = {}) {
     headers,
   };
 
-  if (options.body && typeof options.body === 'object') {
+  if (options.body && typeof options.body === 'object' && !(options.body instanceof FormData)) {
     config.body = JSON.stringify(options.body);
   }
 
@@ -46,4 +47,9 @@ export const api = {
   post: (endpoint, body, options) => request(endpoint, { ...options, method: 'POST', body }),
   put: (endpoint, body, options) => request(endpoint, { ...options, method: 'PUT', body }),
   delete: (endpoint, options) => request(endpoint, { ...options, method: 'DELETE' }),
+  uploadFile: async (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    return request('/upload', { method: 'POST', body: formData });
+  },
 };

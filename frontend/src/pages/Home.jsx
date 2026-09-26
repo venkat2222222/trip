@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, Compass, MapPin, Calendar, Award, ShieldCheck, HeartHandshake, Car, Hotel, Headset, ArrowRight } from 'lucide-react';
+import { Search, Compass, MapPin, Calendar, Award, ShieldCheck, HeartHandshake, Car, Hotel, Headset, ArrowRight, Sparkles } from 'lucide-react';
 import { api } from '../services/api';
 import PackageCard from '../components/PackageCard';
 import PlaceCard from '../components/PlaceCard';
@@ -45,37 +45,39 @@ export default function Home() {
         <div className="container">
           <div className="hero-content">
             <div className="hero-badge">
-              <Compass size={18} /> Premier Travel & Tourism Agency
+              <img src="/logo.png" alt="TRIP MAX" style={{ height: 22, borderRadius: 4 }} />
+              TRIP MAX — Travel Beyond Limits
             </div>
             <h1 className="hero-title">
-              Plan Your <span>Perfect Journey</span> With Expert Guidance
+              Plan Your <span>Perfect Journey</span> In Indian Rupees
             </h1>
             <p className="hero-subtitle">
               Explore handpicked luxury tour packages, discover breathtaking destinations across the world, and create personalized itineraries tailored to your unique preferences.
             </p>
 
             {/* Quick Search Form */}
-            <form onSubmit={handleSearchSubmit} style={{
+            <form onSubmit={handleSearchSubmit} className="hero-search-form" style={{
               background: 'rgba(255, 255, 255, 0.95)',
               padding: '0.6rem',
               borderRadius: '16px',
               display: 'flex',
+              flexWrap: 'wrap',
               gap: '0.5rem',
               maxWidth: '620px',
               boxShadow: '0 12px 30px rgba(0,0,0,0.3)',
               marginBottom: '2rem'
             }}>
-              <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem', paddingLeft: '1rem' }}>
-                <Search size={20} color="#0284c7" />
+              <div style={{ flex: '1 1 240px', display: 'flex', alignItems: 'center', gap: '0.75rem', paddingLeft: '0.75rem', minWidth: 0 }}>
+                <Search size={20} color="#0284c7" style={{ flexShrink: 0 }} />
                 <input 
                   type="text" 
-                  placeholder="Where do you want to go? (e.g., Swiss Alps, Bali, Tokyo)" 
+                  placeholder="Where do you want to go? (e.g., Swiss Alps, Bali)" 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   style={{ border: 'none', background: 'transparent', width: '100%', color: '#0f172a', fontWeight: 500, outline: 'none' }}
                 />
               </div>
-              <button type="submit" className="btn btn-primary" style={{ padding: '0.85rem 1.5rem', borderRadius: '12px' }}>
+              <button type="submit" className="btn btn-primary" style={{ padding: '0.85rem 1.5rem', borderRadius: '12px', flex: '1 1 auto' }}>
                 Search
               </button>
             </form>
@@ -88,6 +90,7 @@ export default function Home() {
                 Customize Your Trip
               </Link>
             </div>
+
           </div>
         </div>
       </section>
@@ -98,7 +101,7 @@ export default function Home() {
           <div className="section-header">
             <span className="section-tag">Popular Tours</span>
             <h2 className="section-title">Featured Tour Packages</h2>
-            <p className="section-desc">Handcrafted itineraries designed for unforgettable memories and hassle-free travel.</p>
+            <p className="section-desc">Handcrafted itineraries with all prices listed transparently in Indian Rupees (₹).</p>
           </div>
 
           {loading ? (
@@ -146,12 +149,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Tourister Section */}
+      {/* Why Choose TRIP MAX Section */}
       <section className="section">
         <div className="container">
           <div className="section-header">
-            <span className="section-tag">Why Tourister</span>
-            <h2 className="section-title">Why Choose Tourister Trip Planner</h2>
+            <span className="section-tag">Why TRIP MAX</span>
+            <h2 className="section-title">Why Choose TRIP MAX Planner</h2>
             <p className="section-desc">We combine global travel expertise with personalized customer service to deliver seamless trips.</p>
           </div>
 
@@ -162,7 +165,7 @@ export default function Home() {
               </div>
               <h3 style={{ marginBottom: '0.75rem' }}>Customized Trips</h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem' }}>
-                Tailor your dates, accommodation preferences, transportation, and activities to fit your unique schedule and budget.
+                Tailor your dates, accommodation preferences, transportation, and activities to fit your unique schedule and budget in Rupees.
               </p>
             </div>
 
@@ -172,7 +175,7 @@ export default function Home() {
               </div>
               <h3 style={{ marginBottom: '0.75rem' }}>Affordable Packages</h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem' }}>
-                Transparent pricing with no hidden costs. Get maximum value for your travel investment with zero compromise on quality.
+                Transparent pricing in ₹ INR with no hidden fees. Get maximum value for your travel investment with zero compromise on quality.
               </p>
             </div>
 
@@ -212,7 +215,7 @@ export default function Home() {
               </div>
               <h3 style={{ marginBottom: '0.75rem' }}>24/7 Dedicated Support</h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem' }}>
-                Our experienced travel concierge team is available around the clock to assist you at every step of your journey.
+                Our experienced TRIP MAX travel concierge team is available around the clock to assist you at every step of your journey.
               </p>
             </div>
           </div>
@@ -227,7 +230,7 @@ export default function Home() {
         padding: '5rem 1rem'
       }}>
         <div className="container">
-          <h2 style={{ fontSize: '2.8rem', marginBottom: '1rem', color: '#fff' }}>Ready To Plan Your Next Adventure?</h2>
+          <h2 style={{ fontSize: '2.8rem', marginBottom: '1rem', color: '#fff' }}>Ready To Plan Your Next TRIP MAX Adventure?</h2>
           <p style={{ fontSize: '1.2rem', color: '#94a3b8', maxWidth: '650px', margin: '0 auto 2.5rem auto' }}>
             Tell us where you want to travel, and our destination specialists will craft a customized itinerary just for you.
           </p>

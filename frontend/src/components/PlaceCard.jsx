@@ -26,7 +26,7 @@ export default function PlaceCard({ place }) {
         <p className="card-desc">{place.description}</p>
         
         <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-          <div><strong>Est. Cost:</strong> ${place.estimatedCost} / person</div>
+          <div><strong>Est. Cost:</strong> ₹{place.estimatedCost} / person</div>
           <div><strong>Best Season:</strong> {place.bestTimeToVisit}</div>
         </div>
 

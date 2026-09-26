@@ -67,7 +67,7 @@ export default function PackageDetail() {
 
               <div style={{ background: 'rgba(15,23,42,0.8)', backdropFilter: 'blur(8px)', padding: '1rem 1.5rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.2)', textAlign: 'right' }}>
                 <span style={{ fontSize: '0.85rem', color: '#94a3b8', display: 'block' }}>Starting From</span>
-                <span style={{ fontSize: '2.2rem', fontWeight: 800, color: '#f59e0b' }}>${pkg.price}</span>
+                <span style={{ fontSize: '2.2rem', fontWeight: 800, color: '#f59e0b' }}>₹{pkg.price}</span>
                 <span style={{ fontSize: '0.85rem', color: '#cbd5e1' }}> / person</span>
               </div>
             </div>
@@ -95,18 +95,18 @@ export default function PackageDetail() {
         </div>
 
         {/* Content Layout */}
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2.5rem' }}>
+        <div className="package-detail-grid" style={{ display: 'grid', gap: '2.5rem' }}>
           {/* Main Details */}
           <div>
-            <div style={{ background: '#fff', padding: '2rem', borderRadius: '16px', border: '1px solid var(--border-light)', marginBottom: '2rem' }}>
+            <div style={{ background: '#fff', padding: '1.75rem', borderRadius: '16px', border: '1px solid var(--border-light)', marginBottom: '2rem' }}>
               <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Package Overview</h3>
               <p style={{ color: 'var(--text-dark)', fontSize: '1.05rem', lineHeight: '1.7' }}>{pkg.description}</p>
             </div>
 
             {/* Inclusions & Exclusions */}
-            <div style={{ background: '#fff', padding: '2rem', borderRadius: '16px', border: '1px solid var(--border-light)', marginBottom: '2rem' }}>
+            <div style={{ background: '#fff', padding: '1.75rem', borderRadius: '16px', border: '1px solid var(--border-light)', marginBottom: '2rem' }}>
               <h3 style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>What's Included & Excluded</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+              <div className="inclusions-grid" style={{ display: 'grid', gap: '2rem' }}>
                 <div>
                   <h4 style={{ color: '#047857', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <CheckCircle2 size={18} /> Included Items
@@ -134,6 +134,7 @@ export default function PackageDetail() {
                 </div>
               </div>
             </div>
+
 
             {/* Day by Day Itinerary */}
             <div style={{ background: '#fff', padding: '2rem', borderRadius: '16px', border: '1px solid var(--border-light)' }}>

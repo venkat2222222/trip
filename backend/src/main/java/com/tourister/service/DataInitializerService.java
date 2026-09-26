@@ -22,6 +22,7 @@ public class DataInitializerService implements CommandLineRunner {
     private final UserRepository userRepository;
     private final TourPackageRepository packageRepository;
     private final PlaceRepository placeRepository;
+    private final SiteContentService siteContentService;
     private final PasswordEncoder passwordEncoder;
 
     @Value("${app.initial-admin.email:admin@tourister.com}")
@@ -39,10 +40,12 @@ public class DataInitializerService implements CommandLineRunner {
     public DataInitializerService(UserRepository userRepository,
                                   TourPackageRepository packageRepository,
                                   PlaceRepository placeRepository,
+                                  SiteContentService siteContentService,
                                   PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.packageRepository = packageRepository;
         this.placeRepository = placeRepository;
+        this.siteContentService = siteContentService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -51,6 +54,7 @@ public class DataInitializerService implements CommandLineRunner {
         seedAdminUser();
         seedTourPackages();
         seedPlaces();
+        siteContentService.getSiteContent(); // Ensures default TRIP MAX content is initialized
     }
 
     private void seedAdminUser() {
@@ -75,7 +79,7 @@ public class DataInitializerService implements CommandLineRunner {
             p1.setDescription("Experience breathtaking Alpine landscapes, pristine crystal-clear lakes, scenic train routes, and historic Swiss villages on this unforgettable 7-day tour.");
             p1.setImageUrl("https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=80");
             p1.setDurationDays(7);
-            p1.setPrice(new BigDecimal("1899.00"));
+            p1.setPrice(new BigDecimal("149999.00"));
             p1.setAccommodation("4-Star Alpine Heritage Hotels & Lakeside Resorts");
             p1.setTransportation("Private Luxury Coach & Swiss Travel Pass Express Trains");
             p1.setFood("Daily Continental Breakfast & 4 Gourmet Swiss Fondue Dinners");
@@ -92,7 +96,7 @@ public class DataInitializerService implements CommandLineRunner {
             p2.setDescription("Discover lush green rice terraces, sacred Hindu temples, private beachfront villas, vibrant sunset beach clubs, and turquoise island waters.");
             p2.setImageUrl("https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80");
             p2.setDurationDays(6);
-            p2.setPrice(new BigDecimal("999.00"));
+            p2.setPrice(new BigDecimal("79999.00"));
             p2.setAccommodation("Luxury Private Pool Villa & Oceanfront Resort");
             p2.setTransportation("Private Chauffeur-driven AC SUV throughout island");
             p2.setFood("All Breakfasts, Balinese Feast & Sunset Beach Dinner");
@@ -109,7 +113,7 @@ public class DataInitializerService implements CommandLineRunner {
             p3.setDescription("Step into a fairytale world of grand palaces, majestic hilltop forts, vibrant desert bazaars, royal heritage hospitality, and serene lake cruises.");
             p3.setImageUrl("https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=1200&q=80");
             p3.setDurationDays(8);
-            p3.setPrice(new BigDecimal("1299.00"));
+            p3.setPrice(new BigDecimal("49999.00"));
             p3.setAccommodation("5-Star Heritage Haveli & Palace Hotels");
             p3.setTransportation("Private AC SUV with Professional Driver");
             p3.setFood("Daily Royal Breakfast & Authentic Rajasthani Thali Dinners");
@@ -126,7 +130,7 @@ public class DataInitializerService implements CommandLineRunner {
             p4.setDescription("Indulge in Italian romance with wine tasting in Tuscan vineyards, Renaissance art galleries in Florence, and dramatic cliffside sea views in Positano.");
             p4.setImageUrl("https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=80");
             p4.setDurationDays(9);
-            p4.setPrice(new BigDecimal("2499.00"));
+            p4.setPrice(new BigDecimal("189999.00"));
             p4.setAccommodation("Boutique Tuscan Villa & Positano Cliffside Hotel");
             p4.setTransportation("High-Speed Frecciarossa Train & Private Coastal Transfers");
             p4.setFood("Breakfasts, 2 Vineyard Wine Tasting Lunches & Pasta Making Class");
@@ -143,7 +147,7 @@ public class DataInitializerService implements CommandLineRunner {
             p5.setDescription("Immerse yourself in Japan's mesmerizing fusion of futuristic neon cities, ancient Shinto shrines, Shinkansen bullet trains, and Mount Fuji vistas.");
             p5.setImageUrl("https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=80");
             p5.setDurationDays(8);
-            p5.setPrice(new BigDecimal("2199.00"));
+            p5.setPrice(new BigDecimal("169999.00"));
             p5.setAccommodation("Premium City Hotels & Traditional Ryokan with Onsen Bath");
             p5.setTransportation("7-Day JR Pass (Shinkansen Bullet Train) & Airport Express");
             p5.setFood("Daily Breakfast & Authentic Kaiseki Banquet Dinner at Ryokan");
@@ -153,7 +157,7 @@ public class DataInitializerService implements CommandLineRunner {
             p5.setFeatured(true);
             packageRepository.save(p5);
 
-            System.out.println(">>> Seeded 5 Tour Packages successfully!");
+            System.out.println(">>> Seeded 5 Tour Packages in INR successfully!");
         }
     }
 
@@ -166,7 +170,7 @@ public class DataInitializerService implements CommandLineRunner {
             pl1.setCategory(PlaceCategory.BEACHES);
             pl1.setDescription("Iconic whitewashed buildings overlooking the Aegean Sea, dramatic volcanic cliffs, world-famous sunsets in Oia, and red sand beaches.");
             pl1.setImageUrl("https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1000&q=80");
-            pl1.setEstimatedCost(new BigDecimal("350.00"));
+            pl1.setEstimatedCost(new BigDecimal("28500.00"));
             pl1.setRecommendedDuration("3-4 Days");
             pl1.setBestTimeToVisit("April to October");
             pl1.setAttractions("Oia Sunset Viewpoint, Akrotiri Archaeological Site, Red Beach, Fira-Oia Cliff Hike, Volcanic Hot Springs Cruise");
@@ -180,7 +184,7 @@ public class DataInitializerService implements CommandLineRunner {
             pl2.setCategory(PlaceCategory.MOUNTAINS);
             pl2.setDescription("The majestic pyramid-shaped peak of the Alps, car-free alpine village of Zermatt, world-class skiing, and Gornergrat cogwheel railway views.");
             pl2.setImageUrl("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80");
-            pl2.setEstimatedCost(new BigDecimal("450.00"));
+            pl2.setEstimatedCost(new BigDecimal("35000.00"));
             pl2.setRecommendedDuration("2-3 Days");
             pl2.setBestTimeToVisit("December to March (Skiing) & June to September (Hiking)");
             pl2.setAttractions("Gornergrat Bahn, Glacier Paradise, Matterhorn Museum, Five Lakes Trail, Alpine Ski Runs");
@@ -194,7 +198,7 @@ public class DataInitializerService implements CommandLineRunner {
             pl3.setCategory(PlaceCategory.HISTORICAL);
             pl3.setDescription("The mystical 15th-century Incan citadel perched high in the Andes mountains surrounded by cloud forests and ancient stonework.");
             pl3.setImageUrl("https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=1000&q=80");
-            pl3.setEstimatedCost(new BigDecimal("300.00"));
+            pl3.setEstimatedCost(new BigDecimal("24000.00"));
             pl3.setRecommendedDuration("2 Days");
             pl3.setBestTimeToVisit("May to October (Dry Season)");
             pl3.setAttractions("Temple of the Sun, Huayna Picchu Peak Hike, Intihuatana Stone, Inca Trail Trek, Sacred Valley");
@@ -208,7 +212,7 @@ public class DataInitializerService implements CommandLineRunner {
             pl4.setCategory(PlaceCategory.RELIGIOUS);
             pl4.setDescription("One of the world's oldest continually inhabited cities, sacred Ganges riverfront ghats, spiritual evening Ganga Aarti rituals, and ancient temples.");
             pl4.setImageUrl("https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1000&q=80");
-            pl4.setEstimatedCost(new BigDecimal("120.00"));
+            pl4.setEstimatedCost(new BigDecimal("9500.00"));
             pl4.setRecommendedDuration("2-3 Days");
             pl4.setBestTimeToVisit("October to March");
             pl4.setAttractions("Dashashwamedh Ghat Evening Aarti, Sunrise Boat Ride, Kashi Vishwanath Temple, Sarnath Buddhist Stupa, Old City Alleys");
@@ -222,7 +226,7 @@ public class DataInitializerService implements CommandLineRunner {
             pl5.setCategory(PlaceCategory.ADVENTURE);
             pl5.setDescription("The world's capital of adrenaline adventure sports nestled on Lake Wakatipu with a backdrop of the dramatic Remarkables mountain range.");
             pl5.setImageUrl("https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1000&q=80");
-            pl5.setEstimatedCost(new BigDecimal("400.00"));
+            pl5.setEstimatedCost(new BigDecimal("32000.00"));
             pl5.setRecommendedDuration("3-5 Days");
             pl5.setBestTimeToVisit("November to April");
             pl5.setAttractions("Kawarau Bridge Bungee Jump, Shotover Jet Boating, Skyline Gondola & Luge, Milford Sound Scenic Cruise, Helicopter Glacier Tour");
@@ -236,7 +240,7 @@ public class DataInitializerService implements CommandLineRunner {
             pl6.setCategory(PlaceCategory.WILDLIFE);
             pl6.setDescription("Vast endless savannah grasslands hosting millions of wildebeest, zebras, lions, leopards, and elephants in the world's greatest wildlife spectacle.");
             pl6.setImageUrl("https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1000&q=80");
-            pl6.setEstimatedCost(new BigDecimal("600.00"));
+            pl6.setEstimatedCost(new BigDecimal("48000.00"));
             pl6.setRecommendedDuration("4-5 Days");
             pl6.setBestTimeToVisit("June to October (Great Migration)");
             pl6.setAttractions("Grumeti & Mara River Crossings, Ngorongoro Crater Safari, Hot Air Balloon Safari, Maasai Cultural Village Visit");
@@ -250,7 +254,7 @@ public class DataInitializerService implements CommandLineRunner {
             pl7.setCategory(PlaceCategory.CITY);
             pl7.setDescription("A hyper-modern urban wonderland featuring glowing skyscrapers, historic wooden shrines, Michelin-star dining, pop culture, and bullet-fast transit.");
             pl7.setImageUrl("https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1000&q=80");
-            pl7.setEstimatedCost(new BigDecimal("350.00"));
+            pl7.setEstimatedCost(new BigDecimal("28000.00"));
             pl7.setRecommendedDuration("4-6 Days");
             pl7.setBestTimeToVisit("March to May & September to November");
             pl7.setAttractions("Shibuya Sky Observatory, Senso-ji Temple, Akihabara Electric Town, Tsukiji Outer Fish Market, Meiji Shrine Forest");
@@ -264,7 +268,7 @@ public class DataInitializerService implements CommandLineRunner {
             pl8.setCategory(PlaceCategory.NATURE);
             pl8.setDescription("Unreal turquoise glacial lakes, towering Rocky Mountain peaks, pine forest valleys, hot springs, and abundant Canadian wildlife.");
             pl8.setImageUrl("https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=1000&q=80");
-            pl8.setEstimatedCost(new BigDecimal("320.00"));
+            pl8.setEstimatedCost(new BigDecimal("26000.00"));
             pl8.setRecommendedDuration("3-4 Days");
             pl8.setBestTimeToVisit("June to September (Lakes) & December to March (Skiing)");
             pl8.setAttractions("Lake Louise Canoe Ride, Moraine Lake Valley of Ten Peaks, Icefields Parkway Drive, Banff Gondola, Upper Hot Springs");
@@ -278,7 +282,7 @@ public class DataInitializerService implements CommandLineRunner {
             pl9.setCategory(PlaceCategory.CITY);
             pl9.setDescription("Ultramodern architecture featuring the tallest tower Burj Khalifa, artificial palm islands, luxury shopping malls, and thrilling dune bashing safaris.");
             pl9.setImageUrl("https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1000&q=80");
-            pl9.setEstimatedCost(new BigDecimal("400.00"));
+            pl9.setEstimatedCost(new BigDecimal("32000.00"));
             pl9.setRecommendedDuration("3-5 Days");
             pl9.setBestTimeToVisit("November to March");
             pl9.setAttractions("Burj Khalifa At The Top, Red Dune Desert Safari with BBQ, Dubai Mall Fountain Show, Palm Jumeirah Monorail, Gold Souk");
@@ -292,14 +296,14 @@ public class DataInitializerService implements CommandLineRunner {
             pl10.setCategory(PlaceCategory.BEACHES);
             pl10.setDescription("Pure tropical paradise with overwater bungalow villas, pristine white sand beaches, crystal clear lagoons, and vibrant coral reef marine life.");
             pl10.setImageUrl("https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1000&q=80");
-            pl10.setEstimatedCost(new BigDecimal("700.00"));
+            pl10.setEstimatedCost(new BigDecimal("55000.00"));
             pl10.setRecommendedDuration("4-5 Days");
             pl10.setBestTimeToVisit("November to April");
             pl10.setAttractions("Overwater Bungalow Stay, Snorkeling with Manta Rays & Sea Turtles, Sunset Dolphin Cruise, Underwater Dining Experience");
             pl10.setPopular(true);
             placeRepository.save(pl10);
 
-            System.out.println(">>> Seeded 10 Destinations successfully!");
+            System.out.println(">>> Seeded 10 Destinations in INR successfully!");
         }
     }
 }

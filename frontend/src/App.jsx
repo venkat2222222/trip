@@ -26,8 +26,11 @@ import UserDashboard from './pages/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminUsers from './pages/AdminUsers';
 import AdminTrips from './pages/AdminTrips';
+import AdminTours from './pages/AdminTours';
+import AdminPlaces from './pages/AdminPlaces';
 import AdminContacts from './pages/AdminContacts';
 import AdminAddAdmin from './pages/AdminAddAdmin';
+import AdminSiteContent from './pages/AdminSiteContent';
 
 export default function App() {
   return (
@@ -67,9 +70,12 @@ export default function App() {
           }>
             <Route index element={<Navigate to="/admin/dashboard" replace />} />
             <Route path="dashboard" element={<AdminDashboard />} />
-            <Route path="users" element={<AdminUsers />} />
+            <Route path="tours" element={<AdminTours />} />
+            <Route path="places" element={<AdminPlaces />} />
             <Route path="trips" element={<AdminTrips />} />
+            <Route path="users" element={<AdminUsers />} />
             <Route path="contacts" element={<AdminContacts />} />
+            <Route path="settings" element={<AdminSiteContent />} />
             <Route path="add-admin" element={<AdminAddAdmin />} />
           </Route>
 

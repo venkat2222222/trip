@@ -21,10 +21,12 @@ public class TripService {
 
     private final TripRequestRepository tripRepository;
     private final UserRepository userRepository;
+    private final EmailService emailService;
 
-    public TripService(TripRequestRepository tripRepository, UserRepository userRepository) {
+    public TripService(TripRequestRepository tripRepository, UserRepository userRepository, EmailService emailService) {
         this.tripRepository = tripRepository;
         this.userRepository = userRepository;
+        this.emailService = emailService;
     }
 
     @Transactional
@@ -53,12 +55,21 @@ public class TripService {
         trip.setFoodPreference(dto.getFoodPreference());
         
         trip.setEstimatedBudget(dto.getEstimatedBudget());
-        trip.setCurrency(dto.getCurrency() != null ? dto.getCurrency() : "USD");
+        trip.setCurrency(dto.getCurrency() != null ? dto.getCurrency() : "INR");
         trip.setSpecialRequirements(dto.getSpecialRequirements());
         trip.setTravelPreferences(dto.getTravelPreferences());
         trip.setStatus(TripStatus.PENDING);
 
         TripRequest saved = tripRepository.save(trip);
+        
+        // Trigger confirmation email to user
+        try {
+            emailService.sendTripConfirmationEmail(saved);
+        } catch (Exception e) {
+            // Log but do not interrupt trip creation transaction
+            System.err.println("Notice: Confirmation email dispatch log: " + e.getMessage());
+        }
+
         return mapToDTO(saved);
     }
 

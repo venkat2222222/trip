@@ -11,7 +11,7 @@ export default function PackageCard({ pkg }) {
           alt={pkg.name} 
         />
         <span className="card-badge">{pkg.durationDays} Days / {pkg.durationDays - 1} Nights</span>
-        <div className="card-price-tag">${pkg.price}</div>
+        <div className="card-price-tag">₹{pkg.price}</div>
       </div>
       <div className="card-body">
         <div className="card-location">

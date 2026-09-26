@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle2 } from 'lucide-react';
 import { api } from '../services/api';
 import ErrorMessage from '../components/ErrorMessage';
 
 export default function ContactUs() {
+  const [settings, setSettings] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,6 +16,20 @@ export default function ContactUs() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
+
+  useEffect(() => {
+    async function loadContactSettings() {
+      try {
+        const res = await api.get('/settings');
+        if (res.data) {
+          setSettings(res.data);
+        }
+      } catch (err) {
+        console.error("Failed to load contact settings", err);
+      }
+    }
+    loadContactSettings();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -47,56 +62,67 @@ export default function ContactUs() {
       <div className="container">
         <div className="section-header">
           <span className="section-tag">Get In Touch</span>
-          <h2 className="section-title">Contact Tourister Team</h2>
-          <p className="section-desc">Have questions about a tour package or need custom travel advice? We're here to help!</p>
+          <h2 className="section-title">Contact TRIP MAX Team</h2>
+          <p className="section-desc">Have questions about a tour package, pricing in Rupees, or need custom travel advice? We're here for you!</p>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '3rem' }}>
           {/* Contact Info Card */}
           <div style={{ background: '#1e293b', color: '#fff', padding: '3rem 2rem', borderRadius: '24px', boxShadow: 'var(--shadow-md)', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            <div>
-              <h3 style={{ fontSize: '1.6rem', color: '#fff', marginBottom: '0.75rem' }}>Contact Information</h3>
-              <p style={{ color: '#94a3b8', fontSize: '0.95rem' }}>Fill out the form or reach out directly to our travel experts.</p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+              <img src="/logo.png" alt="TRIP MAX" style={{ height: 44, borderRadius: 8, background: '#fff' }} />
+              <div>
+                <h3 style={{ fontSize: '1.5rem', color: '#fff', margin: 0 }}>TRIP MAX Support</h3>
+                <p style={{ color: '#f59e0b', fontSize: '0.85rem', fontWeight: 600, margin: 0 }}>Travel Beyond Limits</p>
+              </div>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
-                <div style={{ width: 44, height: 44, borderRadius: '12px', background: 'rgba(14, 165, 233, 0.15)', color: '#0ea5e9', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: 44, height: 44, borderRadius: '12px', background: 'rgba(14, 165, 233, 0.15)', color: '#0ea5e9', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <MapPin size={22} />
                 </div>
                 <div>
                   <h5 style={{ fontSize: '1rem', color: '#fff' }}>Office Address</h5>
-                  <p style={{ color: '#cbd5e1', fontSize: '0.9rem' }}>100 Grand Travel Way, Suite 400<br />San Francisco, CA 94107, USA</p>
+                  <p style={{ color: '#cbd5e1', fontSize: '0.9rem', whiteSpace: 'pre-line' }}>
+                    {settings?.contactAddress || "TRIP MAX Towers, Brigade Road, Bengaluru, Karnataka 560001, India"}
+                  </p>
                 </div>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
-                <div style={{ width: 44, height: 44, borderRadius: '12px', background: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: 44, height: 44, borderRadius: '12px', background: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <Phone size={22} />
                 </div>
                 <div>
                   <h5 style={{ fontSize: '1rem', color: '#fff' }}>Phone Support</h5>
-                  <p style={{ color: '#cbd5e1', fontSize: '0.9rem' }}>+1 (800) 555-0199 (Toll-Free)<br />+1 (415) 555-0144 (Direct)</p>
+                  <p style={{ color: '#cbd5e1', fontSize: '0.9rem' }}>
+                    {settings?.contactPhone || "+91 98765 43210"}
+                  </p>
                 </div>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
-                <div style={{ width: 44, height: 44, borderRadius: '12px', background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: 44, height: 44, borderRadius: '12px', background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <Mail size={22} />
                 </div>
                 <div>
                   <h5 style={{ fontSize: '1rem', color: '#fff' }}>Email Inquiries</h5>
-                  <p style={{ color: '#cbd5e1', fontSize: '0.9rem' }}>support@touristerplanner.com<br />bookings@touristerplanner.com</p>
+                  <p style={{ color: '#cbd5e1', fontSize: '0.9rem' }}>
+                    {settings?.contactEmail || "support@tripmax.com"}
+                  </p>
                 </div>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
-                <div style={{ width: 44, height: 44, borderRadius: '12px', background: 'rgba(168, 85, 247, 0.15)', color: '#a855f7', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: 44, height: 44, borderRadius: '12px', background: 'rgba(168, 85, 247, 0.15)', color: '#a855f7', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <Clock size={22} />
                 </div>
                 <div>
                   <h5 style={{ fontSize: '1rem', color: '#fff' }}>Business Hours</h5>
-                  <p style={{ color: '#cbd5e1', fontSize: '0.9rem' }}>Mon - Fri: 8:00 AM - 8:00 PM EST<br />Sat - Sun: 9:00 AM - 5:00 PM EST</p>
+                  <p style={{ color: '#cbd5e1', fontSize: '0.9rem' }}>
+                    {settings?.operatingHours || "Monday - Saturday: 9:00 AM - 8:00 PM IST"}
+                  </p>
                 </div>
               </div>
             </div>
@@ -160,7 +186,7 @@ export default function ContactUs() {
                     type="text" 
                     name="subject" 
                     className="form-control" 
-                    placeholder="e.g. Booking inquiry"
+                    placeholder="e.g. Package Inquiry"
                     value={formData.subject} 
                     onChange={handleChange} 
                   />
@@ -173,7 +199,7 @@ export default function ContactUs() {
                   name="message" 
                   className="form-control" 
                   rows="5" 
-                  placeholder="How can we help you plan your trip?" 
+                  placeholder="How can we help you plan your next trip?" 
                   value={formData.message} 
                   onChange={handleChange} 
                   required 

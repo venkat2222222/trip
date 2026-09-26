@@ -80,13 +80,13 @@ export default function ExplorePlaces() {
         </div>
 
         {/* Category Pills */}
-        <div style={{ display: 'flex', gap: '0.75rem', overflowX: 'auto', paddingBottom: '1rem', marginBottom: '2.5rem', scrollbarWidth: 'none' }}>
+        <div className="category-scroll-container">
           {CATEGORIES.map(cat => (
             <button
               key={cat}
               onClick={() => handleCategorySelect(cat)}
               className={`btn btn-sm ${activeCategory === cat ? 'btn-primary' : 'btn-outline'}`}
-              style={{ borderRadius: '9999px', textTransform: 'capitalize', whiteSpace: 'nowrap' }}
+              style={{ borderRadius: '9999px', textTransform: 'capitalize', whiteSpace: 'nowrap', flexShrink: 0 }}
             >
               {cat === 'ALL' ? '🌟 All Destinations' : cat.toLowerCase()}
             </button>
@@ -94,7 +94,7 @@ export default function ExplorePlaces() {
         </div>
 
         {/* Search Bar */}
-        <form onSubmit={handleSearchSubmit} className="search-filter-bar" style={{ gridTemplateColumns: '2fr 2fr 1fr' }}>
+        <form onSubmit={handleSearchSubmit} className="search-filter-bar">
           <div className="form-group" style={{ marginBottom: 0 }}>
             <label className="form-label">Search Keyword / Attraction</label>
             <input 
@@ -117,10 +117,11 @@ export default function ExplorePlaces() {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary" style={{ height: '48px', alignSelf: 'end' }}>
+          <button type="submit" className="btn btn-primary" style={{ height: '48px', alignSelf: 'end', width: '100%' }}>
             <Search size={18} /> Search Places
           </button>
         </form>
+
 
         {/* Results Grid */}
         {loading ? (
