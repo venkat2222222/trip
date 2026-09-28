@@ -3,7 +3,7 @@ import { Plus, Search, Edit2, Trash2, Upload, MapPin, DollarSign, Clock, Calenda
 import { api } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
 
-const CATEGORIES = ['ALL', 'BEACH', 'MOUNTAIN', 'HERITAGE', 'ADVENTURE', 'CITY', 'NATURE'];
+const CATEGORIES = ['ALL', 'BEACHES', 'MOUNTAINS', 'HISTORICAL', 'RELIGIOUS', 'ADVENTURE', 'WILDLIFE', 'CITY', 'NATURE'];
 
 export default function AdminPlaces() {
   const [places, setPlaces] = useState([]);
@@ -21,13 +21,13 @@ export default function AdminPlaces() {
   const initialFormState = {
     name: '',
     location: '',
-    category: 'BEACH',
+    category: 'BEACHES',
     description: '',
     imageUrl: '',
-    estimatedCost: 150,
+    estimatedCost: 15000,
     recommendedDuration: '2-3 Days',
     bestTimeToVisit: 'October to March',
-    attractions: 'Local Beaches\nHistorical Monuments\nLocal Food Markets',
+    attractions: 'Local Sightseeing\nHistorical Monuments\nLocal Cuisine',
     popular: false
   };
 
@@ -60,7 +60,7 @@ export default function AdminPlaces() {
     setFormData({
       name: place.name || '',
       location: place.location || '',
-      category: place.category || 'BEACH',
+      category: place.category || 'BEACHES',
       description: place.description || '',
       imageUrl: place.imageUrl || '',
       estimatedCost: place.estimatedCost || 0,

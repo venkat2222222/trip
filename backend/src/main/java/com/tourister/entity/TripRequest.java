@@ -2,6 +2,8 @@ package com.tourister.entity;
 
 import com.tourister.entity.enums.TripStatus;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -45,9 +47,11 @@ public class TripRequest {
     private String currency = "USD";
 
     @Column(columnDefinition = "TEXT")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private String specialRequirements;
 
     @Column(columnDefinition = "TEXT")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private String travelPreferences;
 
     @Enumerated(EnumType.STRING)

@@ -1,6 +1,8 @@
 package com.tourister.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -19,6 +21,7 @@ public class TourPackage {
     private String destination;
 
     @Column(columnDefinition = "TEXT")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private String description;
 
     private String imageUrl;
@@ -34,12 +37,15 @@ public class TourPackage {
     private String food;
 
     @Column(columnDefinition = "TEXT")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private String includedItems;
 
     @Column(columnDefinition = "TEXT")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private String excludedItems;
 
     @Column(columnDefinition = "TEXT")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private String itinerary;
 
     private Boolean featured = false;

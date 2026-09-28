@@ -27,7 +27,14 @@ export async function request(endpoint, options = {}) {
     const data = await response.json().catch(() => ({}));
 
     if (!response.ok) {
-      const error = new Error(data.message || `Request failed with status ${response.status}`);
+      if (response.status === 401) {
+        localStorage.removeItem('tourister_token');
+        localStorage.removeItem('tourister_user');
+      }
+      const defaultMsg = response.status === 403 
+        ? 'Access forbidden. Please log in with appropriate permissions.' 
+        : `Request failed with status ${response.status}`;
+      const error = new Error(data.message || defaultMsg);
       error.status = response.status;
       error.data = data;
       throw error;

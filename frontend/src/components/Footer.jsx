@@ -81,8 +81,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} TRIP MAX. All rights reserved. Travel Beyond Limits.</p>
+        <div className="footer-bottom" style={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '1.5rem', marginTop: '2.5rem', textAlign: 'center', color: '#94a3b8', fontSize: '0.9rem' }}>
+          <p>© {new Date().getFullYear()} <strong>TRIP MAX Travel Planner</strong>. All Rights Reserved. Designed & Developed for Seamless Custom Journeys.</p>
         </div>
       </div>
     </footer>

@@ -15,7 +15,7 @@ export default function TourPackages() {
   const [destination, setDestination] = useState(searchParams.get('destination') || '');
   const [maxPrice, setMaxPrice] = useState(searchParams.get('maxPrice') || '');
   const [maxDuration, setMaxDuration] = useState(searchParams.get('maxDuration') || '');
-  const [sortBy, setSortBy] = useState('price-asc');
+  const [sortBy, setSortBy] = useState('newest');
 
   useEffect(() => {
     fetchPackages();
@@ -65,6 +65,7 @@ export default function TourPackages() {
 
   // Sort packages
   const sortedPackages = [...packages].sort((a, b) => {
+    if (sortBy === 'newest') return (b.id || 0) - (a.id || 0);
     if (sortBy === 'price-asc') return a.price - b.price;
     if (sortBy === 'price-desc') return b.price - a.price;
     if (sortBy === 'duration-asc') return a.durationDays - b.durationDays;
@@ -150,6 +151,7 @@ export default function TourPackages() {
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
             >
+              <option value="newest">Newest Packages First</option>
               <option value="price-asc">Price: Low to High</option>
               <option value="price-desc">Price: High to Low</option>
               <option value="duration-asc">Duration: Shortest First</option>

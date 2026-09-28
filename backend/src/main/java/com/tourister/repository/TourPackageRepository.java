@@ -12,13 +12,15 @@ import java.util.List;
 @Repository
 public interface TourPackageRepository extends JpaRepository<TourPackage, Long> {
     
-    List<TourPackage> findByFeaturedTrue();
+    List<TourPackage> findByFeaturedTrueOrderByIdDesc();
+    List<TourPackage> findAllByOrderByIdDesc();
 
     @Query("SELECT p FROM TourPackage p WHERE " +
            "(:search IS NULL OR LOWER(p.name) LIKE LOWER(CONCAT('%', :search, '%')) OR LOWER(p.destination) LIKE LOWER(CONCAT('%', :search, '%')) OR LOWER(p.description) LIKE LOWER(CONCAT('%', :search, '%'))) AND " +
            "(:destination IS NULL OR LOWER(p.destination) LIKE LOWER(CONCAT('%', :destination, '%'))) AND " +
            "(:maxPrice IS NULL OR p.price <= :maxPrice) AND " +
-           "(:maxDuration IS NULL OR p.durationDays <= :maxDuration)")
+           "(:maxDuration IS NULL OR p.durationDays <= :maxDuration) " +
+           "ORDER BY p.id DESC")
     List<TourPackage> searchPackages(
             @Param("search") String search,
             @Param("destination") String destination,

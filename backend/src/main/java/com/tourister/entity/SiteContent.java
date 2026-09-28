@@ -1,6 +1,8 @@
 package com.tourister.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,18 +16,27 @@ public class SiteContent {
     // Contact Information
     private String contactPhone;
     private String contactEmail;
+
     @Column(columnDefinition = "TEXT")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private String contactAddress;
+
     private String operatingHours;
 
     // About Us Content
     private String aboutTitle;
     private String aboutTagline;
+
     @Column(columnDefinition = "TEXT")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private String aboutStory;
+
     @Column(columnDefinition = "TEXT")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private String aboutMission;
+
     @Column(columnDefinition = "TEXT")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private String aboutVision;
 
     private String happyTravelers;

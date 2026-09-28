@@ -19,11 +19,17 @@ public class PackageService {
     }
 
     public List<TourPackage> getAllPackages(String search, String destination, BigDecimal maxPrice, Integer maxDuration) {
+        if ((search == null || search.trim().isEmpty()) &&
+            (destination == null || destination.trim().isEmpty()) &&
+            maxPrice == null &&
+            maxDuration == null) {
+            return packageRepository.findAllByOrderByIdDesc();
+        }
         return packageRepository.searchPackages(search, destination, maxPrice, maxDuration);
     }
 
     public List<TourPackage> getFeaturedPackages() {
-        return packageRepository.findByFeaturedTrue();
+        return packageRepository.findByFeaturedTrueOrderByIdDesc();
     }
 
     public TourPackage getPackageById(Long id) {

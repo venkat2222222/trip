@@ -2,6 +2,8 @@ package com.tourister.entity;
 
 import com.tourister.entity.enums.ContactStatus;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,6 +25,7 @@ public class ContactMessage {
     private String subject;
 
     @Column(columnDefinition = "TEXT", nullable = false)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private String message;
 
     @Enumerated(EnumType.STRING)

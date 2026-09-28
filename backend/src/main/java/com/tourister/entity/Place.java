@@ -2,6 +2,8 @@ package com.tourister.entity;
 
 import com.tourister.entity.enums.PlaceCategory;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -24,6 +26,7 @@ public class Place {
     private PlaceCategory category;
 
     @Column(columnDefinition = "TEXT")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private String description;
 
     private String imageUrl;
@@ -35,6 +38,7 @@ public class Place {
     private String bestTimeToVisit;
 
     @Column(columnDefinition = "TEXT")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private String attractions;
 
     private Boolean popular = false;

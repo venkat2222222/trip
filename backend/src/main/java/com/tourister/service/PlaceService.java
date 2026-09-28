@@ -19,11 +19,16 @@ public class PlaceService {
     }
 
     public List<Place> getAllPlaces(String search, String location, PlaceCategory category) {
+        if ((search == null || search.trim().isEmpty()) &&
+            (location == null || location.trim().isEmpty()) &&
+            category == null) {
+            return placeRepository.findAllByOrderByIdDesc();
+        }
         return placeRepository.searchPlaces(search, location, category);
     }
 
     public List<Place> getPopularPlaces() {
-        return placeRepository.findByPopularTrue();
+        return placeRepository.findByPopularTrueOrderByIdDesc();
     }
 
     public Place getPlaceById(Long id) {
