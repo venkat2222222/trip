@@ -49,7 +49,7 @@ export default function Home() {
               TRIP MAX — Travel Beyond Limits
             </div>
             <h1 className="hero-title">
-              Plan Your <span>Perfect Journey</span> In Indian Rupees
+              Plan Your <span>Perfect Journey</span> With Trip Max
             </h1>
             <p className="hero-subtitle">
               Explore handpicked luxury tour packages, discover breathtaking destinations across the world, and create personalized itineraries tailored to your unique preferences.
@@ -69,9 +69,9 @@ export default function Home() {
             }}>
               <div style={{ flex: '1 1 240px', display: 'flex', alignItems: 'center', gap: '0.75rem', paddingLeft: '0.75rem', minWidth: 0 }}>
                 <Search size={20} color="#0284c7" style={{ flexShrink: 0 }} />
-                <input 
-                  type="text" 
-                  placeholder="Where do you want to go? (e.g., Swiss Alps, Bali)" 
+                <input
+                  type="text"
+                  placeholder="Where do you want to go? (e.g., Swiss Alps, Bali)"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   style={{ border: 'none', background: 'transparent', width: '100%', color: '#0f172a', fontWeight: 500, outline: 'none' }}
