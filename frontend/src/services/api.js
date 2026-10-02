@@ -1,4 +1,15 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://tripmaxweb-50046480052.development.catalystappsail.in/api';
+function getBaseUrl() {
+  let url = (import.meta.env.VITE_API_BASE_URL || 'https://tripmaxweb-50046480052.development.catalystappsail.in/api').trim();
+  if (url.endsWith('/')) {
+    url = url.slice(0, -1);
+  }
+  if (!url.endsWith('/api')) {
+    url = url + '/api';
+  }
+  return url;
+}
+
+const API_BASE_URL = getBaseUrl();
 
 export async function request(endpoint, options = {}) {
   const token = localStorage.getItem('tourister_token');
