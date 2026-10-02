@@ -45,6 +45,10 @@ public class TouristerSecurityAndFlowTests {
 
     @BeforeEach
     public void setup() throws Exception {
+        userRepository.findByEmail("admin2@tourister.com").ifPresent(userRepository::delete);
+        userRepository.findByEmail("hacker@example.com").ifPresent(userRepository::delete);
+        userRepository.findByEmail("traveler@example.com").ifPresent(userRepository::delete);
+
         // Register regular user
         RegisterRequest userReg = new RegisterRequest("Test Traveler", "traveler@example.com", "+1234567890", "password123");
         mockMvc.perform(post("/api/auth/register")
