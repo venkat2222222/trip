@@ -18,8 +18,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class SecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
 
-    @Value("${app.cors.allowed-origins:http://localhost:5173,http://localhost:3000}")
+    @Value("${app.cors.allowed-origins:*}")
     private String allowedOrigins;
 
     public SecurityConfig(JwtAuthFilter jwtAuthFilter) {
@@ -56,6 +56,7 @@ public class SecurityConfig {
             .headers(headers -> headers.frameOptions(frame -> frame.disable()))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .requestMatchers("/error").permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers("/uploads/**").permitAll()
@@ -76,31 +77,37 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
             );
 
-        http.addFilterBefore(corsFilter(), UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
     @Bean
-    public CorsFilter corsFilter() {
-        return new CorsFilter(corsConfigurationSource());
-    }
-
-    @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+        
         List<String> origins = Arrays.stream(allowedOrigins.split(","))
                 .map(String::trim)
                 .filter(s -> !s.isEmpty())
                 .toList();
 
+        List<String> patterns = new ArrayList<>();
+        patterns.add("https://*.vercel.app");
+        patterns.add("https://*.catalystappsail.in");
+        patterns.add("http://localhost:*");
+        patterns.add("http://127.0.0.1:*");
+
         if (origins.contains("*") || origins.isEmpty()) {
-            configuration.setAllowedOriginPatterns(List.of("*"));
+            patterns.add("*");
         } else {
-            configuration.setAllowedOriginPatterns(origins);
+            for (String origin : origins) {
+                if (!patterns.contains(origin)) {
+                    patterns.add(origin);
+                }
+            }
         }
 
+        configuration.setAllowedOriginPatterns(patterns);
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setExposedHeaders(List.of("Authorization", "Content-Type", "X-Requested-With"));
@@ -112,3 +119,4 @@ public class SecurityConfig {
         return source;
     }
 }
+
