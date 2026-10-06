@@ -4,5 +4,14 @@
       "source": ".",
       "name": "tripmaxweb"
     }
-  ]
+  ],
+  "functions": {
+    "targets": [
+      "sample"
+    ],
+    "ignore": [
+      ".output"
+    ],
+    "source": "functions"
+  }
 }
