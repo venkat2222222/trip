@@ -1,5 +1,5 @@
 function getBaseUrl() {
-  let url = (import.meta.env.VITE_API_BASE_URL || 'https://tripmaxweb-50046480052.development.catalystappsail.in').trim();
+  let url = (import.meta.env.VITE_API_BASE_URL || 'https://tripmaxweb-50046480052.development.catalystappsail.in/api').trim();
   if (url.endsWith('/')) {
     url = url.slice(0, -1);
   }
