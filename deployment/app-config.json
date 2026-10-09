@@ -1,5 +1,5 @@
 {
-	"command": "java -Xms256m -Xmx450m -jar tourister-backend-1.0.0.jar",
+	"command": "java -jar tourister-backend-1.0.0.jar",
 	"build_path": ".",
 	"stack": "java17",
 	"env_variables": {},
